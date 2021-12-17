@@ -4,6 +4,7 @@ const enum githubUrls {
   userRepos = "https://api.github.com/users/$username/repos",
   filesRepo = "https://api.github.com/repos/$username/$repo/git/trees/master?recursive=1",
   activeWebhooksRepo = "https://api.github.com/repos/$username/$repo/hooks",
+  specificFileRepo = "https://api.github.com/repos/$username/$repo/contents/$path",
 }
 
 const promiseGithubApi = (url: string, githubToken: string) => {
@@ -54,5 +55,18 @@ export const getOwnerActiveWebhooksInRepo = (
     .replace("$username", githubUsername)
     .replace("$repo", repositoryName);
 
+  return promiseGithubApi(url, githubToken);
+};
+
+export const getOwnerYmlContentInRepo = (
+  githubUsername: string,
+  githubToken: string,
+  repositoryName: string,
+  filePath: string
+) => {
+  const url = githubUrls.specificFileRepo
+    .replace("$username", githubUsername)
+    .replace("$repo", repositoryName)
+    .replace("$path", filePath);
   return promiseGithubApi(url, githubToken);
 };

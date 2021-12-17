@@ -1,6 +1,7 @@
 import {
   GraphQLBoolean,
   GraphQLInt,
+  GraphQLList,
   GraphQLObjectType,
   GraphQLString,
 } from "graphql";
@@ -14,6 +15,6 @@ export const RepositoryDetailsGraphqlType = new GraphQLObjectType({
     is_private: { type: GraphQLBoolean },
     files: { type: GraphQLInt },
     yml_content: { type: GraphQLString },
-    webhooks: { type: GraphQLString },
+    webhooks: { type: new GraphQLList(GraphQLString) },
   }),
 });

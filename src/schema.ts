@@ -28,7 +28,7 @@ const rootQuery = new GraphQLObjectType({
       },
     },
     reposDetails: {
-      type: new GraphQLList(RepositoryDetailsGraphqlType),
+      type: RepositoryDetailsGraphqlType,
       args: {
         githubUsername: { type: GraphQLString },
         githubToken: { type: GraphQLString },
