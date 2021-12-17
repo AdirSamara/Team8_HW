@@ -20,5 +20,5 @@ export type Details = {
   is_private: boolean; //True - Private ; False - Public
   files: number;
   yml_content: string;
-  webhooks: string;
+  webhooks: string[];
 };
