@@ -1,5 +1,6 @@
 import axios from "axios";
 
+//all github urls api in order to fetch data
 const enum githubUrls {
   userRepos = "https://api.github.com/users/$username/repos",
   filesRepo = "https://api.github.com/repos/$username/$repo/git/trees/master?recursive=1",
@@ -7,6 +8,12 @@ const enum githubUrls {
   specificFileRepo = "https://api.github.com/repos/$username/$repo/contents/$path",
 }
 
+/**
+ *
+ * @param url url of github for fetching data
+ * @param githubToken "developer token" from github
+ * @returns promise that holds the data
+ */
 const promiseGithubApi = (url: string, githubToken: string) => {
   return new Promise((resolve, reject) => {
     axios({

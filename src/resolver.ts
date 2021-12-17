@@ -4,18 +4,21 @@ import {
   getOwnerRepositories,
   getOwnerYmlContentInRepo,
 } from "./services/git.service";
-import { Details } from "./types/Details";
 import { Repository } from "./types/Repository";
 import {
   extractGithubRepositoriesList,
   extractGithubRepositoryDetails,
 } from "./utils/git";
 
+/**
+ * first task to get list of repositories
+ * @param githubUsername github username
+ * @param githubToken "developer token" from github
+ */
 export const reposList = function (
   githubUsername: string,
   githubToken: string
 ) {
-  console.log("reposList");
   getOwnerRepositories(githubUsername, githubToken)
     .then((data) => {
       const repositories: Repository[] = extractGithubRepositoriesList(data);
@@ -25,12 +28,17 @@ export const reposList = function (
       console.error(err);
     });
 };
+/**
+ * second task to get details about repo
+ * @param githubUsername github username
+ * @param githubToken "developer token" from github
+ * @param repositoryName some repo to get details on it
+ */
 export const reposDetails = async function (
   githubUsername: string,
   githubToken: string,
   repositoryName: string
 ) {
-  console.log("repo details");
   const results: any = await Promise.all([
     getOwnerRepositories(githubUsername, githubToken),
     getOwnerFilesInRepo(githubUsername, githubToken, repositoryName),
