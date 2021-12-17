@@ -1,0 +1,27 @@
+{
+  "name": "team8",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdirSamara/Team8_HW.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AdirSamara/Team8_HW/issues"
+  },
+  "homepage": "https://github.com/AdirSamara/Team8_HW#readme",
+  "devDependencies": {
+    "@types/node": "^17.0.0",
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4"
+  }
+}
