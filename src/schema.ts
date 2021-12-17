@@ -32,9 +32,14 @@ const rootQuery = new GraphQLObjectType({
       args: {
         githubUsername: { type: GraphQLString },
         githubToken: { type: GraphQLString },
+        githubRepoName: { type: GraphQLString },
       },
       resolve(_, args) {
-        return resolver.reposDetails(args.githubUsername, args.githubToken);
+        return resolver.reposDetails(
+          args.githubUsername,
+          args.githubToken,
+          args.githubRepoName
+        );
       },
     },
   },

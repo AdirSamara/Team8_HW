@@ -1,4 +1,7 @@
-import { getOwnerRepositories } from "./services/git.service";
+import {
+  getOwnerFilesInRepo,
+  getOwnerRepositories,
+} from "./services/git.service";
 import { Details } from "./types/Details";
 import { Repository } from "./types/Repository";
 import {
@@ -14,26 +17,21 @@ export const reposList = function (
   getOwnerRepositories(githubUsername, githubToken)
     .then((data) => {
       const repositories: Repository[] = extractGithubRepositoriesList(data);
-      console.log(repositories);
       return repositories;
     })
     .catch((err) => {
       console.error(err);
     });
 };
-export const reposDetails = function (
+export const reposDetails = async function (
   githubUsername: string,
-  githubToken: string
+  githubToken: string,
+  repositoryName: string
 ) {
   console.log("repo details");
-  getOwnerRepositories(githubUsername, githubToken)
-    .then((data) => {
-      const repositories: Details[] = extractGithubRepositoriesDetails(data);
-      console.log(repositories);
-
-      return repositories;
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+  const results = await Promise.all([
+    getOwnerRepositories(githubUsername, githubToken),
+    getOwnerFilesInRepo(githubUsername, githubToken, repositoryName),
+  ]);
+  console.log(results[results.length - 1]);
 };
