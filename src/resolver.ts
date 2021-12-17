@@ -1,4 +1,5 @@
 import {
+  getOwnerActiveWebhooksInRepo,
   getOwnerFilesInRepo,
   getOwnerRepositories,
 } from "./services/git.service";
@@ -29,9 +30,19 @@ export const reposDetails = async function (
   repositoryName: string
 ) {
   console.log("repo details");
-  const results = await Promise.all([
+  const results: any = await Promise.all([
     getOwnerRepositories(githubUsername, githubToken),
     getOwnerFilesInRepo(githubUsername, githubToken, repositoryName),
+    getOwnerActiveWebhooksInRepo(githubUsername, githubToken, repositoryName),
   ]);
-  console.log(results[results.length - 1]);
+  try {
+    const filesResult = results[1].tree.length;
+    const webHooksResult = results[2].filter(
+      (webhook: any) => webhook.active === true
+    );
+    console.log(filesResult);
+    console.log(webHooksResult);
+  } catch (e) {
+    console.error(e);
+  }
 };
